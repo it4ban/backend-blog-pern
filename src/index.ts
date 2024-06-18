@@ -19,11 +19,11 @@ app.post('/auth/login', checkValidation(loginValidation), UserController.login);
 app.post('/auth/register', checkValidation(registerValidation), UserController.register);
 app.post('/auth/me', checkToken, UserController.getMe);
 
+app.get('/posts', PostController.getAll);
+app.get('/posts/tags', PostController.getLastTags);
+app.get('/posts/:id', PostController.getOne);
 app.post('/posts', checkToken, checkValidation(postCreateValidation), PostController.create);
 app.patch('/posts/:id', checkToken, checkValidation(postCreateValidation), PostController.update);
-// app.post('/posts', PostController.getAll);
-// app.post('/posts/:id', PostController.getOne);
-// app.post('/posts/tags', PostController.getLastTags);
-// app.delete('/posts/:id', checkToken, PostController.delete);
+app.delete('/posts/:id', checkToken, PostController.delete);
 
 app.listen(4444, () => console.log('Server is running on port 4444'));
