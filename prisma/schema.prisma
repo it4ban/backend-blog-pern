@@ -21,4 +21,17 @@ model User {
   email        String   @unique
   passwordHash String
   avatar       String?
+  Post         Post[]
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  tags      String[] @default([])
+  viewCount Int      @default(0)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  imageUrl  String
 }
