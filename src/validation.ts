@@ -12,4 +12,11 @@ const loginValidation = [
 	body('password', 'Длинна пароля не менее 6 символов').isLength({ min: 6 }),
 ];
 
-module.exports = { registerValidation, loginValidation };
+const postCreateValidation = [
+	body('title', 'Введите заголовок статьи').isLength({ min: 3 }).isString(),
+	body('text', 'Введите текст статьи').isLength({ min: 3 }).isString(),
+	body('tags', 'Неверный формат тэгов').optional().isArray(),
+	body('imageUrl', 'Неверная ссылка на изображение').optional().isString(),
+];
+
+module.exports = { registerValidation, loginValidation, postCreateValidation };

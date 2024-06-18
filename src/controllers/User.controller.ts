@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const prisma = require('../client');
 
 import { Request, Response } from 'express';
-import { IUserInfoRequest } from '../utils/checkToken.interface';
+import { IUserInfoRequest } from '../middlewares/checkToken.interface';
 
 class UserController {
 	async register(req: Request, res: Response) {
