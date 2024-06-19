@@ -1,12 +1,9 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const prisma = require('../client');
-
-import { Request, Response } from 'express';
-import { IUserInfoRequest } from '../middlewares/checkToken.interface';
+const prisma = require('../utils/client');
 
 class UserController {
-	async register(req: Request, res: Response) {
+	async register(req, res) {
 		try {
 			const password = req.body.password;
 			const salt = await bcrypt.genSalt(10);
@@ -46,7 +43,7 @@ class UserController {
 		}
 	}
 
-	async login(req: Request, res: Response) {
+	async login(req, res) {
 		try {
 			const user = await prisma.user.findUnique({
 				where: {
@@ -91,7 +88,7 @@ class UserController {
 		}
 	}
 
-	async getMe(req: IUserInfoRequest, res: Response) {
+	async getMe(req, res) {
 		try {
 			const user = await prisma.user.findUnique({
 				where: {

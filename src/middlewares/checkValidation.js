@@ -1,8 +1,5 @@
-import { Request, Response, NextFunction } from 'express';
-import { ValidationChain } from 'express-validator';
-
-const checkValidation = (templValidate: Array<ValidationChain>) => {
-	return async (req: Request, res: Response, next: NextFunction) => {
+const checkValidation = (templValidate) => {
+	return async (req, res, next) => {
 		const errors = [];
 
 		for (const validation of templValidate) {

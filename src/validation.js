@@ -1,4 +1,4 @@
-import { body } from 'express-validator';
+const { body } = require('express-validator');
 
 const registerValidation = [
 	body('email', 'Неверный формат почты').trim().isEmail(),

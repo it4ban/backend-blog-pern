@@ -1,11 +1,8 @@
 const jwt = require('jsonwebtoken');
-import { Response, NextFunction } from 'express';
 
-import { IUserInfoRequest } from './checkToken.interface';
-
-const checkToken = (req: IUserInfoRequest, res: Response, next: NextFunction) => {
+const checkToken = (req, res, next) => {
 	try {
-		const token = req.headers.authorization;
+		const token = req.headers.authorization?.replace(/Bearer\s?/, '');
 
 		const decoded = jwt.verify(token, 'secret321');
 		req.userId = decoded.id;

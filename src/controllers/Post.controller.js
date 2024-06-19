@@ -1,10 +1,7 @@
-import { Request, Response } from 'express';
-const prisma = require('../client');
-
-import { IUserInfoRequest } from '../middlewares/checkToken.interface';
+const prisma = require('../utils/client');
 
 class PostController {
-	async getAll(req: Request, res: Response) {
+	async getAll(req, res) {
 		try {
 			const posts = await prisma.post.findMany({
 				include: {
@@ -26,7 +23,7 @@ class PostController {
 		}
 	}
 
-	async getOne(req: IUserInfoRequest, res: Response) {
+	async getOne(req, res) {
 		try {
 			const post = await prisma.post.update({
 				where: {
@@ -48,14 +45,14 @@ class PostController {
 		}
 	}
 
-	async getLastTags(req: IUserInfoRequest, res: Response) {
+	async getLastTags(req, res) {
 		try {
 			const post = await prisma.post.findMany({
 				take: 5,
 			});
 
 			const tags = post
-				.map((item: any) => item.tags)
+				.map((item) => item.tags)
 				.flat()
 				.slice(0, 5);
 
@@ -68,7 +65,7 @@ class PostController {
 		}
 	}
 
-	async create(req: IUserInfoRequest, res: Response) {
+	async create(req, res) {
 		try {
 			const post = await prisma.post.create({
 				data: {
@@ -89,7 +86,7 @@ class PostController {
 		}
 	}
 
-	async update(req: IUserInfoRequest, res: Response) {
+	async update(req, res) {
 		try {
 			const postId = req.params.id;
 
@@ -117,7 +114,7 @@ class PostController {
 		}
 	}
 
-	async delete(req: IUserInfoRequest, res: Response) {
+	async delete(req, res) {
 		try {
 			const postId = req.params.id;
 
@@ -131,7 +128,6 @@ class PostController {
 				success: true,
 			});
 		} catch (err) {
-			console.log(err.code);
 			res.status(500).json({
 				message: 'Не удалось удалить статью',
 			});
